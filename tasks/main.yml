@@ -1,0 +1,19 @@
+---
+- name: Ensure .local/share exists
+  file:
+    state: directory
+    path: "{{ desktop_user_vars.dir }}/.local/share"
+- name: Checkout kubectx git repo
+  git:
+    repo: https://github.com/ahmetb/kubectx
+    dest: "{{ desktop_user_vars.dir }}/.local/share/kubectx"
+- name: Create ctx symlink
+  file:
+    state: link
+    src: "{{ desktop_user_vars.dir }}/.local/share/kubectx/kubectx"
+    dest: "{{ desktop_user_vars.dir }}/bin/ctx"
+- name: Create ns symlink
+  file:
+    state: link
+    src: "{{ desktop_user_vars.dir }}/.local/share/kubectx/kubens"
+    dest: "{{ desktop_user_vars.dir }}/bin/ns"
