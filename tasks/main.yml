@@ -7,13 +7,13 @@
   git:
     repo: https://github.com/ahmetb/kubectx
     dest: "{{ desktop_user_vars.dir }}/.local/share/kubectx"
-- name: Create ctx symlink
+- name: Create symlinks
   file:
     state: link
     src: "{{ desktop_user_vars.dir }}/.local/share/kubectx/kubectx"
     dest: "{{ desktop_user_vars.dir }}/bin/ctx"
-- name: Create ns symlink
-  file:
-    state: link
-    src: "{{ desktop_user_vars.dir }}/.local/share/kubectx/kubens"
-    dest: "{{ desktop_user_vars.dir }}/bin/ns"
+  loop:
+  - { dest: 'kctx', src: 'kubectx' }
+  - { dest: 'kns', src: 'kubens' }
+  - { dest: 'kns.bash', src: 'completion/kubens.bash' }
+  - { dest: 'kctx.bash', src: 'completion/kubectx.bash' }
