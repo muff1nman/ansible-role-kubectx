@@ -10,8 +10,8 @@
 - name: Create symlinks
   file:
     state: link
-    src: "{{ desktop_user_vars.dir }}/.local/share/kubectx/kubectx"
-    dest: "{{ desktop_user_vars.dir }}/bin/ctx"
+    src: "{{ desktop_user_vars.dir }}/.local/share/kubectx/{{ item.src }}"
+    dest: "{{ desktop_user_vars.dir }}/bin/{{ item.dest }}"
   loop:
   - { dest: 'kctx', src: 'kubectx' }
   - { dest: 'kns', src: 'kubens' }
